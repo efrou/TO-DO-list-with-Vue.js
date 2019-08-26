@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Vue | Todo List</title>
+​
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+​
+    <link rel="stylesheet" href="style.css">
+​
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  </head>
+  <body>
+​
+    <!-- APP -->
+    <div id="app">
+      <!-- HERO -->
+      <section class="hero is-small is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Vue: Todo List</h1>
+            <p v-if="tareasPendientes==0" class="subtitle">No tienes tareas pendientes.</p>
+            <p v-if="tareasPendientes==1" class="subtitle">Tienes <strong>1</strong> tarea pendiente.</p>
+            <p v-if="tareasPendientes>1" class="subtitle">Tienes <strong>{{ tareasPendientes }}</strong> tareas pendientes.</p>
+          </div>
+        </div>
+      </section>
+      <!-- HERO -->
+​
+      <!-- FORM/TASKs -->
+      <section class="section is-small">
+        <div class="container">
+          <div class="panel">  
+            <!-- HEADER -->
+            <div class="panel-heading">
+              <div class="field has-addons">
+                <!-- INPUT -->
+                <div class="control is-expanded">
+                  <input v-model="nuevaTarea" 
+                  class="input" type="text" placeholder="Agregar tarea"
+                  v-on:keyup.enter="agregarTarea">
+                </div>
+                <!-- INPUT -->
+                <!-- BUTTON -->
+                <div class="control">
+                  <button v-on:click="agregarTarea" class="button is-primary">
+                    <span>Agregar</span>
+                    <span class="icon is-small"><i class="fas fa-plus"></i></span>
+                  </button>
+                </div>
+                <!-- BUTTON -->
+              </div>
+            </div>
+            <!-- HEADER -->
+​
+            <!-- TAREAS -->
+            <div 
+                v-for='(tarea, index) in tareas' 
+                class="panel-block tarea"
+                v-bind:class="{'tarea-lista': tarea.finalizada}"
+                v-on:click="finalizarTarea(index)"
+                >
+              <span v-show='tarea.finalizada' class="icon has-text-primary"><i class="fas fa-check-circle"></i></span>
+              <span v-show='!tarea.finalizada' class="icon"><i class="far fa-circle"></i></span>
+​
+              <span class="tarea-texto">{{ tarea.texto }}</span>  
+​
+              <button v-on:click="eliminarTarea(event, index)" class="delete"></button>
+            </div>
+           
+            <!-- TAREAS -->
+​
+            <!-- FOOTER -->
+            <div class="panel-block">
+              <button v-on:click="limpiarTareas" class="button is-danger is-outlined is-fullwidth">
+                <span>Borrar todas las tareas</span>
+                <span class="icon is-small"><i class="fas fa-trash"></i></span>
+              </button>
+            </div>
+            <!-- FOOTER -->
+          </div>
+        </div>
+      </section>
+      <!-- FORM/TASKs -->
+    </div>
+    <!-- APP -->
+​
+    <script src="script.js"></script>
+  </body>
+</html>

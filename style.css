@@ -1,0 +1,27 @@
+.section.is-small {
+    padding: 1.5rem 1.5rem;
+  }
+  ​
+.panel-block.tarea {
+width           : 100%;
+cursor          : pointer;
+display         : flex;
+position        : relative;
+align-items     : center;
+justify-content : center;
+}
+.panel-block.tarea:hover {
+background-color: #fafafa;
+}
+.panel-block.tarea .icon {
+font-size    : 1.25em;
+margin-right : 8px;
+}
+.panel-block.tarea .tarea-texto {
+flex      : 1;
+font-size : 16px;
+}
+.panel-block.tarea.tarea-lista {
+color: rgba(0, 0, 0, .25);
+text-decoration: line-through;
+}
